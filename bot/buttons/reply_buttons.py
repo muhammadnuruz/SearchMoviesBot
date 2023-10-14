@@ -1,11 +1,14 @@
 from aiogram.types import ReplyKeyboardMarkup
 
 from bot.buttons.text import movie, back_main_menu, admins_txt, statistic, advert, sub_admins, add_admins, add_movie, \
-    sub_movie, movie_setting
+    sub_movie, movie_setting, cabinet, vip, add_money
 
 
 async def main_menu_buttons():
-    design = [[movie]]
+    design = [
+        [cabinet, movie],
+        [vip, add_money]
+    ]
     return ReplyKeyboardMarkup(keyboard=design, resize_keyboard=True)
 
 
