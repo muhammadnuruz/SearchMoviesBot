@@ -22,7 +22,7 @@ async def get_movie_function(call: types.CallbackQuery):
     movies, button = await get_id_movies_button(id_=id_)
     await Movies.update(id_=id_, seen=movies[0].seen + 1)
     await call.message.delete()
-    await call.message.answer_video(video=open(movies[0].path, 'rb'), caption=f"""
+    await call.message.answer_video(video=movies[0].path, caption=f"""
 🎬 Nomi: {movies[0].name}
 🌍 Davlati: {movies[0].country}
 🇺🇿 Tili: {movies[0].language}
@@ -44,7 +44,7 @@ async def search_by_name_function_2(msg: types.Message, state: FSMContext):
     movies, button = await get_name_movies_button(name=msg.text)
     if movies:
         await Movies.update(id_=movies[0].id, seen=movies[0].seen + 1)
-        await msg.answer_video(video=open(movies[0].path, 'rb'), caption=f"""
+        await msg.answer_video(video=movies[0].path, caption=f"""
 🎬 Nomi: {movies[0].name}
 🌍 Davlati: {movies[0].country}
 🇺🇿 Tili: {movies[0].language}

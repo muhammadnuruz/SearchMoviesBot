@@ -66,10 +66,10 @@ async def add_movie_step_6(msg: types.Message, state: FSMContext):
 @dp.message_handler(state='movie_path', content_types=ContentType.VIDEO)
 async def add_movie_step_7(msg: types.Message, state: FSMContext):
     async with state.proxy() as data: pass
-    path = "movies/" + str(uuid.uuid4()) + "mp4"
-    file = await bot.get_file(msg.video.file_id)
-    await bot.download_file(file.file_path, f"{path}")
-    await Movies.create(name=data['name'], path=path, country=data['country'], language=data['language'],
+    # path = "movies/" + str(uuid.uuid4()) + "mp4"
+    # file = await bot.get_file(msg.video.file_id)
+    # await bot.download_file(file.file_path, f"{path}")
+    await Movies.create(name=data['name'], path=msg.video.file_id, country=data['country'], language=data['language'],
                         date=data['date'], genre=data['genre'])
     await state.finish()
     await msg.answer(text="Kino saqlandi✅", reply_markup=await admin_buttons())
